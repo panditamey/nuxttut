@@ -1,14 +1,14 @@
 <template>
-  <div class="posts-list p-6">
-    <h1 class="text-3xl font-bold mb-6">Posts</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div
-        v-for="post in posts"
-        :key="post.id"
-        class="post-card p-4 border rounded-lg shadow-md"
-      >
-        <h2 class="text-xl font-semibold mb-2">{{ post.title }}</h2>
-        <p class="text-gray-600">{{ post.body }}</p>
+  <div>
+    <h2>Product List</h2>
+    <div v-if="loading">Loading posts...</div>
+    <div v-if="error">{{ error }}</div>
+    <div v-if="posts.length">
+      <div v-for="post in posts" :key="post.id">
+        <h2>{{ post.id }}</h2>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.body }}</p>
+        <hr />
       </div>
     </div>
   </div>
@@ -20,24 +20,24 @@ import axios from "axios";
 export default {
   data() {
     return {
-      posts: [], // Initialize posts as an empty array
+      posts: [],
+      loading: true,
+      error: null,
     };
   },
-  async asyncData() {
+  async created() {
     try {
-      const { data: posts } = await axios.get(
+      const response = await axios.get(
         "https://jsonplaceholder.typicode.com/posts"
       );
-      console.log("Posts:", posts);
-      return { posts };
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-      return { posts: [] };
+
+      console.log(response.data);
+      this.posts = response.data;
+    } catch (err) {
+      this.error = "Failed to load posts";
+    } finally {
+      this.loading = false;
     }
   },
 };
 </script>
-
-<style scoped>
-/* Add any additional styling here */
-</style>
