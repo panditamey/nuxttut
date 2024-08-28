@@ -1,20 +1,22 @@
+import axiosFakestore from "~/plugins/axios-fakestore";
+
 export const state = () => ({
-    posts:[],
-})
+  products: [],
+});
 
 export const mutations = {
-    setPosts(state,posts){
-        state.posts = posts
-    }
-}
+  setProducts(state, products) {
+    state.products = products;
+  },
+};
 
 export const getters = {
-    allPosts:(state)=>state.posts,
-}
+  allProducts: (state) => state.products,
+};
 
 export const actions = {
-    async fetchPosts({commit}){
-        const response = await this.$axios.get('https://jsonplaceholder.typicode.com/posts')
-        commit('setPosts',response.data)
-    }
-}
+  async fetchProducts({ commit }) {
+    const products = await axiosFakestore.get("/");
+    commit("setProducts", products);
+  },
+};
