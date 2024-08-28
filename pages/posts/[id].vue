@@ -1,8 +1,12 @@
 <template>
-  <div class="post-details p-6">
-    <h1 class="text-3xl font-bold mb-4">Post Details {{ $route.params.id }}</h1>
-    <h2 class="text-xl font-semibold mb-2">{{ posts.title }}</h2>
-    <p class="text-gray-600">{{ posts.body }}</p>
+  <div>
+    <div v-if="loading">Loading posts...</div>
+    <div v-if="posts.id" class="post-details p-6">
+      <h1 class="text-3xl font-bold mb-4">Post Details</h1>
+      <h2 class="text-xl font-semibold mb-2">ID : {{ $route.params.id }}</h2>
+      <h2 class="text-xl font-semibold mb-2">{{ posts.title }}</h2>
+      <p class="text-gray-600">{{ posts.body }}</p>
+    </div>
   </div>
 </template>
 
