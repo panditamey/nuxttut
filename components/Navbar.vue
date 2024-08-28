@@ -2,6 +2,8 @@
   <nav>
     <nuxt-link to="/">Home</nuxt-link>
     <nuxt-link to="/about">About Us</nuxt-link>
+    <nuxt-link to="/posts">Posts</nuxt-link>
+    <nuxt-link to="/products">Products</nuxt-link>
   </nav>
 </template>
 

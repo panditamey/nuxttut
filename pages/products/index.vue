@@ -8,6 +8,7 @@
         <hr />
       </div>
     </div>
+    <div v-else>Loading products...</div>
   </div>
 </template>
 
