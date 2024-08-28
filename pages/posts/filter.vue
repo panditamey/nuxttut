@@ -31,8 +31,12 @@ export default {
         "https://jsonplaceholder.typicode.com/posts"
       );
 
-      // console.log(response.data);
-      this.posts = response.data;
+      const userid = this.$route.query.userid;
+      console.log(userid);
+      const newarr = response.data.filter(
+        (post) => post.userId === parseInt(userid)
+      );
+      this.posts = newarr;
     } catch (err) {
       this.error = "Failed to load posts";
     } finally {
